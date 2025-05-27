@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Mess Menu - January 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .social-bar {
+            width: 100%;
+            background: rgba(255,255,255,0.92);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            z-index: 1001;
+            position: relative;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .social-bar a {
+            margin: 0 10px;
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 1.3em;
+            vertical-align: middle;
+        }
+        .social-bar a[aria-label="Twitter"] { color: #1da1f2; }
+        .social-bar a[aria-label="LinkedIn"] { color: #0077b5; }
+        .social-bar a[aria-label="GitHub"] { color: #333; }
+        .social-bar a:hover { opacity: 0.7; }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+            padding: 32px 18px 18px 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .floating-food {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: containerEntrance 1s ease-out;
+        }
+
+        @keyframes containerEntrance {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            text-align: center;
+            padding: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: headerPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes headerPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            animation: subtitleFade 3s ease-in-out infinite;
+        }
+
+        @keyframes subtitleFade {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 0.6; }
+        }
+
+        .day-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .day-selector::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: selectorShine 3s infinite;
+        }
+
+        @keyframes selectorShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .day-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .day-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .day-btn:hover::before {
+            left: 100%;
+        }
+
+        .day-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .day-btn.active {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.5);
+            animation: activeButtonPulse 2s infinite;
+        }
+
+        @keyframes activeButtonPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 154, 158, 0.5); }
+            50% { box-shadow: 0 15px 40px rgba(255, 154, 158, 0.8); }
+        }
+
+        .menu-content {
+            padding: 40px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            position: relative;
+        }
+
+        .day-menu {
+            display: none;
+        }
+
+        .day-menu.active {
+            display: block;
+            animation: menuSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes menuSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px) rotateY(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotateY(0);
+            }
+        }
+
+        .day-title {
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            font-weight: 700;
+            animation: titleGradient 3s ease infinite;
+            position: relative;
+        }
+
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .day-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: underlineGrow 2s ease infinite;
+        }
+
+        @keyframes underlineGrow {
+            0%, 100% { width: 100px; }
+            50% { width: 150px; }
+        }
+
+        .meals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .meal-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+
+        .meal-card:nth-child(1) { animation-delay: 0s; }
+        .meal-card:nth-child(2) { animation-delay: 1s; }
+        .meal-card:nth-child(3) { animation-delay: 2s; }
+        .meal-card:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(0.5deg); }
+            66% { transform: translateY(-5px) rotate(-0.5deg); }
+        }
+
+        .meal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef, #667eea, #764ba2);
+            background-size: 300% 100%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .meal-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .meal-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .meal-card:hover {
+            transform: translateY(-15px) scale(1.03) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .meal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            animation: titleShimmer 2s ease infinite;
+        }
+
+        @keyframes titleShimmer {
+            0%, 100% { text-shadow: 0 0 5px rgba(0,0,0,0.1); }
+            50% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+        }
+
+        .meal-items {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .meal-items li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: #666;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 30px;
+            transition: all 0.3s ease;
+            animation: itemFadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .meal-items li:nth-child(1) { animation-delay: 0.1s; }
+        .meal-items li:nth-child(2) { animation-delay: 0.2s; }
+        .meal-items li:nth-child(3) { animation-delay: 0.3s; }
+        .meal-items li:nth-child(4) { animation-delay: 0.4s; }
+        .meal-items li:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes itemFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .meal-items li:hover {
+            color: #495057;
+            transform: translateX(10px);
+            font-weight: 500;
+        }
+
+        .meal-items li::before {
+            content: '🍽️';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            animation: iconSpin 3s ease infinite;
+        }
+
+        @keyframes iconSpin {
+            0%, 90%, 100% { transform: rotate(0deg); }
+            95% { transform: rotate(360deg); }
+        }
+
+        .meal-items li:last-child {
+            border-bottom: none;
+        }
+
+        .special-item {
+            color: #dc3545;
+            font-weight: 600;
+            position: relative;
+            animation: specialGlow 2s ease infinite;
+        }
+
+        @keyframes specialGlow {
+            0%, 100% { text-shadow: 0 0 5px rgba(220, 53, 69, 0.3); }
+            50% { text-shadow: 0 0 15px rgba(220, 53, 69, 0.6); }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: footerPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes footerPulse {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .note {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffd93d;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            color: #856404;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+            animation: notePulse 3s ease infinite;
+            box-shadow: 0 5px 15px rgba(255, 217, 61, 0.3);
+        }
+
+        @keyframes notePulse {
+            0%, 100% { box-shadow: 0 5px 15px rgba(255, 217, 61, 0.3); }
+            50% { box-shadow: 0 10px 30px rgba(255, 217, 61, 0.5); }
+        }
+
+        /* Particle Effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .day-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .meals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .meal-card {
+                padding: 25px;
+            }
+
+            .day-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Social Handles Section -->
+    <div class="social-bar">
+        made by <span style="font-weight:600;">Rajbir</span>:
+        <a href="https://twitter.com/yourtwitter" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com/in/yourlinkedin" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/yourgithub" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+
+
+    <!-- Floating Background Elements -->
+    <div class="floating-food" style="left: 5%; animation-delay: 0s;">🍕</div>
+    <div class="floating-food" style="left: 15%; animation-delay: 2s;">🍔</div>
+    <div class="floating-food" style="left: 25%; animation-delay: 4s;">🍜</div>
+    <div class="floating-food" style="left: 35%; animation-delay: 6s;">🍛</div>
+    <div class="floating-food" style="left: 45%; animation-delay: 8s;">🍳</div>
+    <div class="floating-food" style="left: 55%; animation-delay: 10s;">🥗</div>
+    <div class="floating-food" style="left: 65%; animation-delay: 12s;">🍰</div>
+    <div class="floating-food" style="left: 75%; animation-delay: 14s;">🧁</div>
+    <div class="floating-food" style="left: 85%; animation-delay: 16s;">🍎</div>
+    <div class="floating-food" style="left: 95%; animation-delay: 18s;">🥤</div>
+
+    <!-- Particle System -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🍽️ Student Mess Menu</h1>
+            <p>✨ January - June 2025  Daily Meal Schedule ✨</p>
+        </div>
+
+        <div class="day-selector">
+            <button class="day-btn active" onclick="showDay('monday')">🌟 Monday</button>
+            <button class="day-btn" onclick="showDay('tuesday')">🔥 Tuesday</button>
+            <button class="day-btn" onclick="showDay('wednesday')">⚡ Wednesday</button>
+            <button class="day-btn" onclick="showDay('thursday')">🌈 Thursday</button>
+            <button class="day-btn" onclick="showDay('friday')">🎉 Friday</button>
+            <button class="day-btn" onclick="showDay('saturday')">🌺 Saturday</button>
+            <button class="day-btn" onclick="showDay('sunday')">🎊 Sunday</button>
+        </div>
+
+        <div class="menu-content">
+            <!-- Monday Menu -->
+            <div class="day-menu active" id="monday">
+                <h2 class="day-title">Monday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Set Dosa, Vadacurry, Idly Podi, Oil, Chapathi</li>
+                            <li>Soya aalo Kasha</li>
+                            <li>Tea/Coffee/Milk</li>
+                            <li>Boiled Egg, Banana</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li><span class="special-item">Kori Chapganti</span>, Veg Chettinad Curry, Jeera Pulao</li>
+                            <li>Mint Chapathi, Steamed Rice, Arachivita Sambar, Panchratna Dal</li>
+                            <li><span class="special-item">Raw Banana Fry</span>, Pineapple Rasam, Pickle, Butter Milk</li>
+                            <li>Fryums, Boiled Vegetable</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Pav Baji</li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+
+                        <!-- updated till here -->
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li>Madras/Wheat Chappathi, Mutton/Paneer</li>
+                            <li>Masala Vegetable Idly, Idly Podi Oil, Special Chutney</li>
+                            <li>Steamed Rice, <span class="special-item">Moong Dal Tadka</span></li>
+                            <li>Sambar, Rasam, Pickle Fryums, Veg Salad, Milk</li>
+                            <li>Fish Gravy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tuesday Menu -->
+            <div class="day-menu" id="tuesday">
+                <h2 class="day-title">Tuesday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Poori, Dal Aloo Masala</li>
+                            <li>Semla Veg Kichadi, Chutney</li>
+                            <li>Tea/Coffee/Milk</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li>Sweet, <span class="special-item">Bahara Pulao</span>, Chappathi, <span class="special-item">Meal Maker Curry</span></li>
+                            <li>Steamed Rice, <span class="special-item">Pesalu Garelu</span>, Dal Fry</li>
+                            <li>Tomato Rasam, Juntial Peas Roasted, Fryums</li>
+                            <li>Pickle, <span class="special-item">Butter Milk</span></li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Mysore Bonda/Drigha Pakoda</li>
+                            <li>Chutney</li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li>Ghee Chappathi, Black Chana, Steamed Rice</li>
+                            <li>Vegetable Dal</li>
+                            <li><span class="special-item">Veg/Chilly Gobi Dry</span>, Millet Dosa, Idly Podi Oil</li>
+                            <li>Pepper Rasam, Pickle Fryums, Veg Salad, Milk</li>
+                            <li>Chicken Gravy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wednesday Menu -->
+            <div class="day-menu" id="wednesday">
+                <h2 class="day-title">Wednesday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Idly, Idly Podi Oil</li>
+                            <li><span class="special-item">Kourma Sambal</span>, Chutney, Dosa, Mint Chutney</li>
+                            <li>Tea/Coffee/Milk, Masala Omelet</li>
+                            <li>Banana</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li>Chappathi, <span class="special-item">Muttar Masala</span>, <span class="special-item">Spinach Aloo</span>, Veg Pulao</li>
+                            <li>Steamed Rice, Tomato Sambar, Dal Tadka, Garlic Rasam</li>
+                            <li>Pickle, Butter Milk, Fryums</li>
+                            <li>Boiled Vegetable</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Veg Puff(or)</li>
+                            <li><span class="special-item">Aloo Bonda</span></li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li>Chappathi, Steamed Rice, Dal Tadka, Chicken Masala</li>
+                            <li>(Non-Veg)/Capsicum Butter Masala/Butter Masala</li>
+                            <li>Tomato Pepper, Rasam, Pickle Fryums</li>
+                            <li>Veg Salad Milk</li>
+                            <li>Chicken Gravy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thursday Menu -->
+            <div class="day-menu" id="thursday">
+                <h2 class="day-title">Thursday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Idiyappam (Lemon for)</li>
+                            <li>Masala) Or Millet Idiyappam, Chappathi, White Peas Masala</li>
+                            <li>Chutney</li>
+                            <li>Tea/Coffee/Milk</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li><span class="special-item">Beetroot Chappathi</span>, <span class="special-item">Gobi Capsicum</span>, <span class="special-item">Onion Pulao</span></li>
+                            <li>Steamed Rice, <span class="special-item">Mysore Dal Fry</span>, Kadi Pakoda</li>
+                            <li>Rasam, Pickle, Vam Fryums, Butter Milk</li>
+                            <li>Fryums</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Pani Poori (or)</li>
+                            <li>Chenna Sundal</li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li><span class="special-item">Veg Soup</span>, Ghee Poori, Steamed Rice</li>
+                            <li>Tomato Dal, Veg Upma, Coconut Chutney</li>
+                            <li>Rasam, Pickle Fryums, Veg Salad, Milk, Banana</li>
+                            <li>Mutton Gravy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ...continuation from your file... -->
+            <!-- Friday Menu -->
+            <div class="day-menu" id="friday">
+                <h2 class="day-title">Friday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Veg Upma, Chutney</li>
+                            <li>Tea/Coffee/Milk</li>
+                            <li>Boiled Egg</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li>Chappathi, Rajma Masala, Steamed Rice</li>
+                            <li>Drumstick Sambar, Dal Fry, Aloo Gobi</li>
+                            <li>Tomato Rasam, Pickle, Butter Milk, Fryums</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Veg Cutlet</li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li>Wheat Chappathi, Paneer Butter Masala</li>
+                            <li>Steamed Rice, Dal Tadka, Sambar, Rasam</li>
+                            <li>Pickle, Fryums, Veg Salad, Milk</li>
+                            <li>Fish Gravy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saturday Menu -->
+            <div class="day-menu" id="saturday">
+                <h2 class="day-title">Saturday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Pongal, Vada</li>
+                            <li>Coconut Chutney, Tea/Coffee/Milk</li>
+                            <li>Banana</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li>Chappathi, Veg Kurma, Steamed Rice</li>
+                            <li>Dal Makhani, Sambar, Rasam, Pickle</li>
+                            <li>Butter Milk, Fryums, Boiled Vegetable</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Onion Pakoda</li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li>Ghee Rice, Chappathi, Egg Curry/Paneer Curry</li>
+                            <li>Steamed Rice, Dal Fry, Sambar, Rasam</li>
+                            <li>Pickle, Fryums, Veg Salad, Milk</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sunday Menu -->
+            <div class="day-menu" id="sunday">
+                <h2 class="day-title">Sunday Menu</h2>
+                <div class="meals-grid">
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌅 Breakfast</h3>
+                        <ul class="meal-items">
+                            <li>Bread, Butter, Jam, Dosa, Sambar</li>
+                            <li>Coconut Chutney, Tea/Coffee/Milk</li>
+                            <li>Boiled Egg</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍛 Lunch</h3>
+                        <ul class="meal-items">
+                            <li>Chappathi, Veg Pulao, Chole Masala</li>
+                            <li>Steamed Rice, Dal Tadka, Sambar, Rasam</li>
+                            <li>Pickle, Butter Milk, Fryums</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🍪 Snacks</h3>
+                        <ul class="meal-items">
+                            <li>Samosa</li>
+                            <li>Tea/Coffee</li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <h3 class="meal-title">🌙 Dinner</h3>
+                        <ul class="meal-items">
+                            <li>Wheat Chappathi, Mixed Veg Curry</li>
+                            <li>Steamed Rice, Dal Fry, Sambar, Rasam</li>
+                            <li>Pickle, Fryums, Veg Salad, Milk</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong> Menu is subject to seasonal availability. Special items are marked in red. Both vegetarian and non-vegetarian options are provided where applicable.
+        </div>
+
+        <div class="footer">
+            &copy; 2025 Rajbir Biswas | Designed for Even Semester 2025
+        </div>
+    </div>
+
+    <!-- JavaScript for Day Switching and Particles -->
+    <script>
+        // Day tab switching
+        function showDay(dayId) {
+            // Remove active from all buttons and menus
+            document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.day-menu').forEach(menu => menu.classList.remove('active'));
+            // Set active for clicked button and corresponding menu
+            document.querySelector(`.day-btn[onclick*="${dayId}"]`).classList.add('active');
+            document.getElementById(dayId).classList.add('active');
+        }
+
+        // Particle effect
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const count = 60;
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                p.style.animationDelay = (Math.random() * 15) + 's';
+                p.style.background = `rgba(255,255,255,${0.2 + Math.random() * 0.4})`;
+                particles.appendChild(p);
+            }
+        }
+        createParticles();
+    </script>
+</body>
+</html>
