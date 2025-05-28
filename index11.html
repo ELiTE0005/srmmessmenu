@@ -5,30 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Mess Menu - January 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        html {
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            min-height: 100vh;
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
-            overflow-x: hidden;
+            box-sizing: border-box;
         }
+
+
         @keyframes gradientShift {
-            0% {background-position:0% 50%;}
-            50% {background-position:100% 50%;}
-            100% {background-position:0% 50%;}
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
+
         .social-bar {
             width: 100%;
             background: rgba(255,255,255,0.92);
@@ -63,6 +54,40 @@
             position: relative;
             z-index: 1;
         }
+
+
+        .floating-food {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: containerEntrance 1s ease-out;
+        }
+
+        @keyframes containerEntrance {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             text-align: center;
@@ -71,32 +96,80 @@
             position: relative;
             overflow: hidden;
         }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: headerPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes headerPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
         .header h1 {
-            font-size: 2.2rem;
+            font-size: 3rem;
             font-weight: 800;
             margin-bottom: 15px;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
+            animation: titleBounce 2s ease-in-out infinite;
         }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         .header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
             position: relative;
             z-index: 1;
+            animation: subtitleFade 3s ease-in-out infinite;
         }
+
+        @keyframes subtitleFade {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 0.6; }
+        }
+
         .day-selector {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            padding: 22px 0 18px 0;
+            gap: 15px;
+            padding: 30px;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             border-bottom: 1px solid #e9ecef;
             position: relative;
         }
+
+        .day-selector::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: selectorShine 3s infinite;
+        }
+
+        @keyframes selectorShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
         .day-btn {
-            padding: 12px 24px;
+            padding: 15px 30px;
             border: none;
             border-radius: 50px;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -104,173 +177,372 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
-        .day-btn.active, .day-btn:hover {
+
+        .day-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .day-btn:hover::before {
+            left: 100%;
+        }
+
+        .day-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .day-btn.active {
             background: linear-gradient(135deg, #ff9a9e, #fecfef);
-            color: #333;
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.5);
+            animation: activeButtonPulse 2s infinite;
         }
+
+        @keyframes activeButtonPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 154, 158, 0.5); }
+            50% { box-shadow: 0 15px 40px rgba(255, 154, 158, 0.8); }
+        }
+
         .menu-content {
-            padding: 32px 0 0 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            position: relative;
         }
+
         .day-menu {
             display: none;
         }
+
         .day-menu.active {
             display: block;
-            animation: menuSlideIn 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: menuSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
+
         @keyframes menuSlideIn {
-            0% { opacity: 0; transform: translateX(-30px);}
-            100% { opacity: 1; transform: translateX(0);}
+            0% {
+                opacity: 0;
+                transform: translateX(-50px) rotateY(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotateY(0);
+            }
         }
+
         .day-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 28px;
+            margin-bottom: 40px;
             font-weight: 700;
+            animation: titleGradient 3s ease infinite;
+            position: relative;
         }
+
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .day-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: underlineGrow 2s ease infinite;
+        }
+
+        @keyframes underlineGrow {
+            0%, 100% { width: 100px; }
+            50% { width: 150px; }
+        }
+
         .meals-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+            gap: 30px;
         }
+
         .meal-card {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 18px;
-            padding: 24px;
+            border-radius: 20px;
+            padding: 30px;
             position: relative;
-            transition: box-shadow 0.3s;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 2px 10px rgba(30,144,255,0.07);
+            backdrop-filter: blur(10px);
+            animation: cardFloat 6s ease-in-out infinite;
         }
+
+        .meal-card:nth-child(1) { animation-delay: 0s; }
+        .meal-card:nth-child(2) { animation-delay: 1s; }
+        .meal-card:nth-child(3) { animation-delay: 2s; }
+        .meal-card:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(0.5deg); }
+            66% { transform: translateY(-5px) rotate(-0.5deg); }
+        }
+
+        .meal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef, #667eea, #764ba2);
+            background-size: 300% 100%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .meal-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .meal-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .meal-card:hover {
+            transform: translateY(-15px) scale(1.03) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
         .meal-title {
-            font-size: 1.15rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #495057;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            animation: titleShimmer 2s ease infinite;
+        }
+
+        @keyframes titleShimmer {
+            0%, 100% { text-shadow: 0 0 5px rgba(0,0,0,0.1); }
+            50% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+        }
+
+        .meal-items {
+            list-style: none;
             position: relative;
             z-index: 1;
         }
-        .meal-items {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+
         .meal-items li {
-            padding: 10px 0 10px 28px;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             color: #666;
             line-height: 1.5;
             position: relative;
-            transition: color 0.2s;
+            padding-left: 30px;
+            transition: all 0.3s ease;
+            animation: itemFadeIn 0.5s ease forwards;
+            opacity: 0;
         }
-        .meal-items li:last-child {
-            border-bottom: none;
+
+        .meal-items li:nth-child(1) { animation-delay: 0.1s; }
+        .meal-items li:nth-child(2) { animation-delay: 0.2s; }
+        .meal-items li:nth-child(3) { animation-delay: 0.3s; }
+        .meal-items li:nth-child(4) { animation-delay: 0.4s; }
+        .meal-items li:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes itemFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+
+        .meal-items li:hover {
+            color: #495057;
+            transform: translateX(10px);
+            font-weight: 500;
+        }
+
         .meal-items li::before {
             content: '🍽️';
             position: absolute;
             left: 0;
             font-size: 1rem;
+            animation: iconSpin 3s ease infinite;
         }
+
+        @keyframes iconSpin {
+            0%, 90%, 100% { transform: rotate(0deg); }
+            95% { transform: rotate(360deg); }
+        }
+
+        .meal-items li:last-child {
+            border-bottom: none;
+        }
+
         .special-item {
             color: #dc3545;
             font-weight: 600;
             position: relative;
+            animation: specialGlow 2s ease infinite;
         }
+
+        @keyframes specialGlow {
+            0%, 100% { text-shadow: 0 0 5px rgba(220, 53, 69, 0.3); }
+            50% { text-shadow: 0 0 15px rgba(220, 53, 69, 0.6); }
+        }
+
         .footer {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
             text-align: center;
-            padding: 24px;
-            font-size: 1em;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: footerPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes footerPulse {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
         .note {
             background: linear-gradient(135deg, #fff3cd, #ffeaa7);
             border: 2px solid #ffd93d;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 28px 0 0 0;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
             color: #856404;
             text-align: center;
             font-weight: 500;
-            font-size: 1em;
+            position: relative;
+            animation: notePulse 3s ease infinite;
+            box-shadow: 0 5px 15px rgba(255, 217, 61, 0.3);
         }
-        /* Floating food emojis */
-        .floating-food {
-            position: fixed;
-            font-size: 2em;
-            opacity: 0.14;
-            pointer-events: none;
-            animation: float 18s linear infinite;
-            z-index: 0;
+
+        @keyframes notePulse {
+            0%, 100% { box-shadow: 0 5px 15px rgba(255, 217, 61, 0.3); }
+            50% { box-shadow: 0 10px 30px rgba(255, 217, 61, 0.5); }
         }
-        @keyframes float {
-            0% { top: -40px;}
-            100% { top: 110vh;}
-        }
+
         /* Particle Effect */
         .particles {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 0;
         }
+
         .particle {
             position: absolute;
-            width: 7px;
-            height: 7px;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            background: rgba(30,144,255,0.13);
-            animation: particle-float 17s linear infinite;
+            animation: particleFloat 15s infinite linear;
         }
-        @keyframes particle-float {
-            0% {transform: translateY(0);}
-            100% {transform: translateY(100vh);}
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
         }
-        /* ---------- MOBILE OPTIMIZATION ---------- */
-        @media (max-width: 700px) {
-            html { font-size: 15px; }
-            .container { padding: 10px 2vw; }
-            .header { padding: 22px 5px;}
-            .header h1 { font-size: 1.3em; }
-            .day-title { font-size: 1.1em; }
-            .day-selector { gap: 6px; padding: 10px 0 10px 0;}
-            .day-btn { padding: 10px 12px; font-size: 0.93em; min-width: 44px;}
-            .menu-content { padding: 10px 0 0 0;}
-            .meals-grid { grid-template-columns: 1fr; gap: 12px;}
-            .meal-card { padding: 14px; }
-            .note { font-size: 0.97em; padding: 10px;}
-        }
-        @media (max-width: 500px) {
-            html { font-size: 14px; }
-            .container { padding: 2px 1vw;}
-            .header { padding: 12px 2px;}
-            .footer { padding: 14px; font-size: 0.95em;}
-            .note { padding: 8px; font-size: 0.93em;}
-        }
-        /* Reduce floating emojis and particles on mobile for performance */
-        @media (max-width: 700px) {
-            .floating-food:nth-child(n+4) { display: none !important; }
-            .particles { display: none !important; }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .day-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .meals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .meal-card {
+                padding: 25px;
+            }
+
+            .day-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+
     <!-- Social Handles Section -->
     <div class="social-bar">
         made by <span style="font-weight:600;">Rajbir</span>:
@@ -278,6 +550,7 @@
         <a href="https://www.linkedin.com/in/rajbirbiswas" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://github.com/ELiTE0005" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
     </div>
+
 
     <!-- Floating Background Elements -->
     <div class="floating-food" style="left: 5%; animation-delay: 0s;">🍕</div>
@@ -339,6 +612,8 @@
                             <li>Pav Baji</li>
                             <li>Tea/Coffee</li>
                         </ul>
+
+                        <!-- updated till here -->
                     </div>
                     <div class="meal-card">
                         <h3 class="meal-title">🌙 Dinner</h3>
@@ -352,6 +627,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Tuesday Menu -->
             <div class="day-menu" id="tuesday">
                 <h2 class="day-title">Tuesday Menu</h2>
@@ -393,6 +669,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Wednesday Menu -->
             <div class="day-menu" id="wednesday">
                 <h2 class="day-title">Wednesday Menu</h2>
@@ -435,6 +712,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Thursday Menu -->
             <div class="day-menu" id="thursday">
                 <h2 class="day-title">Thursday Menu</h2>
@@ -476,6 +754,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ...continuation from your file... -->
             <!-- Friday Menu -->
             <div class="day-menu" id="friday">
                 <h2 class="day-title">Friday Menu</h2>
@@ -514,6 +794,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Saturday Menu -->
             <div class="day-menu" id="saturday">
                 <h2 class="day-title">Saturday Menu</h2>
@@ -551,6 +832,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Sunday Menu -->
             <div class="day-menu" id="sunday">
                 <h2 class="day-title">Sunday Menu</h2>
@@ -603,16 +885,18 @@
     <script>
         // Day tab switching
         function showDay(dayId) {
+            // Remove active from all buttons and menus
             document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.day-menu').forEach(menu => menu.classList.remove('active'));
+            // Set active for clicked button and corresponding menu
             document.querySelector(`.day-btn[onclick*="${dayId}"]`).classList.add('active');
             document.getElementById(dayId).classList.add('active');
         }
-        // Particle effect - reduced for mobile
+
+        // Particle effect
         function createParticles() {
-            if(window.innerWidth < 700) return;
             const particles = document.getElementById('particles');
-            const count = 30;
+            const count = 60;
             for (let i = 0; i < count; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
